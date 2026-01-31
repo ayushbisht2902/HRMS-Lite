@@ -22,7 +22,7 @@ Lightweight HRMS system for managing employees and attendance.
 3. Set up your `.env` file (refer to `.env.example`).
 4. Start the server:
    ```bash
-   uvicorn app.main:app --reload
+   python -m uvicorn app.main:app --reload
    ```
 
 ### Frontend
