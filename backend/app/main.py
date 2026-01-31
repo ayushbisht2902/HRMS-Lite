@@ -2,19 +2,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine, Base
 from app.routes import employees, attendance
-from app.models import Employee, Attendance # Ensure models are loaded for table creation
+from app.models import Employee, Attendance  # Ensure models are loaded for table creation
 from sqlalchemy.exc import OperationalError
 import time
-
-# Create tables
-Base.metadata.create_all(bind=engine)
+from sqlalchemy import text
 
 app = FastAPI(title="HRMS Lite API")
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, replace with specific frontend URL
+    allow_origins=["*"],  # In production, replace with specific frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -24,15 +22,17 @@ app.add_middleware(
 app.include_router(employees.router)
 app.include_router(attendance.router)
 
-
 @app.on_event("startup")
 def startup():
+    # Wait for DB to be ready
     for i in range(10):
         try:
             Base.metadata.create_all(bind=engine)
             break
         except OperationalError:
             time.sleep(2)
+
+
 @app.get("/health")
 def health():
     try:
