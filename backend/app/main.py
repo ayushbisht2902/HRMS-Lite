@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine, Base
 from app.routes import employees, attendance
 from app.models import Employee, Attendance # Ensure models are loaded for table creation
+from sqlalchemy.exc import OperationalError
+import time
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -21,6 +23,15 @@ app.add_middleware(
 # Include Routers
 app.include_router(employees.router)
 app.include_router(attendance.router)
+
+@app.on_event("startup")
+def startup():
+    for i in range(10):
+        try:
+            Base.metadata.create_all(bind=engine)
+            break
+        except OperationalError:
+            time.sleep(2)
 
 @app.get("/")
 def read_root():
