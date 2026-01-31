@@ -2,23 +2,20 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine, Base
 from app.routes import employees, attendance
-from app.models import Employee, Attendance # Ensure models are loaded for table creation
+from app.models import Employee, Attendance
 
-# Create tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="HRMS Lite API")
 
-# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, replace with specific frontend URL
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include Routers
 app.include_router(employees.router)
 app.include_router(attendance.router)
 

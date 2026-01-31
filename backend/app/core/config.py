@@ -6,15 +6,23 @@ load_dotenv()
 
 class Settings:
     PROJECT_NAME: str = "HRMS Lite"
-    MYSQL_USER: str = os.getenv("MYSQL_USER", "root")
-    MYSQL_PASSWORD: str = os.getenv("MYSQL_PASSWORD", "")
-    MYSQL_HOST: str = os.getenv("MYSQL_HOST", "localhost")
-    MYSQL_PORT: str = os.getenv("MYSQL_PORT", "3306")
-    MYSQL_DB: str = os.getenv("MYSQL_DB", "hrms_lite")
     
     @property
     def SQLALCHEMY_DATABASE_URL(self) -> str:
-        encoded_password = quote_plus(self.MYSQL_PASSWORD)
-        return f"mysql+pymysql://{self.MYSQL_USER}:{encoded_password}@{self.MYSQL_HOST}:{self.MYSQL_PORT}/{self.MYSQL_DB}"
+        database_url = os.getenv("DATABASE_URL") or os.getenv("MYSQL_URL")
+        
+        if database_url:
+            if database_url.startswith("mysql://"):
+                return database_url.replace("mysql://", "mysql+pymysql://", 1)
+            return database_url
+        
+        MYSQL_USER = os.getenv("MYSQL_USER", "root")
+        MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "")
+        MYSQL_HOST = os.getenv("MYSQL_HOST", "localhost")
+        MYSQL_PORT = os.getenv("MYSQL_PORT", "3306")
+        MYSQL_DB = os.getenv("MYSQL_DB", "hrms_lite")
+        
+        encoded_password = quote_plus(MYSQL_PASSWORD)
+        return f"mysql+pymysql://{MYSQL_USER}:{encoded_password}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
 
 settings = Settings()
