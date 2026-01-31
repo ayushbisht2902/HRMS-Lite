@@ -24,6 +24,7 @@ app.add_middleware(
 app.include_router(employees.router)
 app.include_router(attendance.router)
 
+
 @app.on_event("startup")
 def startup():
     for i in range(10):
@@ -32,6 +33,14 @@ def startup():
             break
         except OperationalError:
             time.sleep(2)
+@app.get("/health")
+def health():
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        return {"status": "ok"}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
 
 @app.get("/")
 def read_root():
