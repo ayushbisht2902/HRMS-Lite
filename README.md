@@ -8,6 +8,22 @@ Lightweight HRMS system for managing employees and attendance.
 - **Backend**: FastAPI
 - **Database**: MySQL
 
+## MySQL Setup
+1. **Install MySQL Server**: Make sure it’s running on port `3306`.
+2. **Create the Database**:
+   ```sql
+   CREATE DATABASE IF NOT EXISTS hrms_lite;
+   ```
+3. **Configure Permissions**: Ensure your user has access to this database.
+4. **Update Backend `.env`**: Fill in your credentials:
+   ```env
+   MYSQL_HOST=localhost
+   MYSQL_PORT=3306
+   MYSQL_DB=hrms_lite
+   MYSQL_USER=root
+   MYSQL_PASSWORD=your_password
+   ```
+
 ## How to Run Locally
 
 ### Backend
@@ -22,7 +38,7 @@ Lightweight HRMS system for managing employees and attendance.
 3. Set up your `.env` file (refer to `.env.example`).
 4. Start the server:
    ```bash
-   python -m uvicorn app.main:app --reload
+   uvicorn app.main:app --reload
    ```
 
 ### Frontend
