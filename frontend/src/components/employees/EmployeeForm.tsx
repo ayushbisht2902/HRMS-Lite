@@ -26,12 +26,17 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({ onSubmit, isSubmitti
         { value: 'Design', label: 'Design' }
     ];
 
-    const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         await onSubmit(formData);
         // Clear form if successful (this logic is simplified, usually controlled by parent if error occurs)
         if (!error) {
-            // Re-initialize state if valid
+            setFormData({
+                employee_id: '',
+                full_name: '',
+                email: '',
+                department: ''
+            });
         }
     };
 
