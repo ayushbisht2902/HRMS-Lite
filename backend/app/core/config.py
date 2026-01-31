@@ -28,7 +28,7 @@ class Settings:
     PROJECT_NAME: str = "HRMS Lite"
     MYSQL_URL: str = os.getenv("MYSQL_URL")
 
-    if not DATABASE_URL:
+    if not MYSQL_URL:
         raise RuntimeError("MYSQL_URL is not set")
 
 settings = Settings()
