@@ -6,6 +6,7 @@ from app.models import Employee, Attendance  # Ensure models are loaded for tabl
 from sqlalchemy.exc import OperationalError
 import time
 from sqlalchemy import text
+import os
 
 app = FastAPI(title="HRMS Lite API")
 
@@ -38,6 +39,7 @@ def health():
     try:
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
+            print("MYSQL_URL:", os.getenv("MYSQL_URL"))
         return {"status": "ok"}
     except Exception as e:
         return {"status": "error", "detail": str(e)}
