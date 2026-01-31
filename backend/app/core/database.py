@@ -5,7 +5,7 @@ from .config import settings
 
 # engine = create_engine(settings.SQLALCHEMY_DATABASE_URL)
 engine = create_engine(
-    settings.DATABASE_URL.replace("mysql://", "mysql+pymysql://"),
+    settings.MYSQL_URL.replace("mysql://", "mysql+pymysql://"),
     pool_pre_ping=True,
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
