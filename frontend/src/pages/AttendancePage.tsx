@@ -116,7 +116,7 @@ const AttendancePage: React.FC = () => {
 
             {/* 3. Attendance Records Table & Filters */}
             <section>
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 px-1">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8 px-1">
                     <div>
                         <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
                             {selectedEmployee ? `Activity Log: ${selectedEmployee.full_name}` : 'History Log'}
@@ -124,22 +124,22 @@ const AttendancePage: React.FC = () => {
                     </div>
 
                     {selectedEmployeeId && (
-                        <div className="flex flex-wrap items-center gap-4 bg-gray-50 p-2 rounded border border-gray-200">
-                            <div className="flex items-center gap-2 text-xs">
-                                <span className="text-gray-400 font-bold uppercase">From</span>
+                        <div className="w-full lg:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                            <div className="flex items-center gap-3 text-xs">
+                                <span className="text-gray-400 font-bold uppercase min-w-[32px]">From</span>
                                 <input
                                     type="date"
-                                    className="border-gray-300 rounded p-1"
+                                    className="flex-1 border-gray-300 rounded p-1.5 focus:ring-2 focus:ring-blue-100 outline-none"
                                     value={startDate}
                                     onChange={e => setStartDate(e.target.value)}
                                     max={getTodayLocal()}
                                 />
                             </div>
-                            <div className="flex items-center gap-2 text-xs">
-                                <span className="text-gray-400 font-bold uppercase">To</span>
+                            <div className="flex items-center gap-3 text-xs">
+                                <span className="text-gray-400 font-bold uppercase min-w-[32px]">To</span>
                                 <input
                                     type="date"
-                                    className="border-gray-300 rounded p-1"
+                                    className="flex-1 border-gray-300 rounded p-1.5 focus:ring-2 focus:ring-blue-100 outline-none"
                                     value={endDate}
                                     onChange={e => setEndDate(e.target.value)}
                                     max={getTodayLocal()}
@@ -147,33 +147,33 @@ const AttendancePage: React.FC = () => {
                             </div>
                             <button
                                 onClick={handleFilterChange}
-                                className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors"
+                                className="sm:ml-2 bg-blue-600 text-white px-4 py-1.5 rounded-md text-xs font-semibold hover:bg-blue-700 active:scale-95 transition-all shadow-sm"
                             >
-                                Apply
+                                Apply Filters
                             </button>
                         </div>
                     )}
                 </div>
 
                 {!selectedEmployeeId ? (
-                    <div className="py-20 text-center text-gray-400 border border-gray-100 rounded-lg bg-gray-50/30">
+                    <div className="py-20 text-center text-gray-400 border border-gray-100 rounded-lg bg-gray-50/30 px-4">
                         Select an employee from the dropdown to view and manage their logs.
                     </div>
                 ) : (
-                    <div className="space-y-6">
+                    <div className="space-y-8">
                         {/* Summary Cards */}
-                        <div className="grid grid-cols-3 gap-6">
-                            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm text-center">
-                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Total Recs</p>
-                                <p className="text-3xl font-bold text-gray-900">{stats.total}</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                            <div className="bg-white border border-gray-200 p-4 sm:p-6 rounded-lg shadow-sm text-center">
+                                <p className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1 sm:mb-2">Total Recs</p>
+                                <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.total}</p>
                             </div>
-                            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm text-center">
-                                <p className="text-[10px] font-bold text-green-500 uppercase tracking-widest mb-2">Present</p>
-                                <p className="text-3xl font-bold text-gray-900">{stats.present}</p>
+                            <div className="bg-white border border-gray-200 p-4 sm:p-6 rounded-lg shadow-sm text-center">
+                                <p className="text-[10px] sm:text-[11px] font-bold text-green-500 uppercase tracking-widest mb-1 sm:mb-2">Present</p>
+                                <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.present}</p>
                             </div>
-                            <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm text-center">
-                                <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mb-2">Absent</p>
-                                <p className="text-3xl font-bold text-gray-900">{stats.absent}</p>
+                            <div className="bg-white border border-gray-200 p-4 sm:p-6 rounded-lg shadow-sm text-center sm:col-span-2 md:col-span-1">
+                                <p className="text-[10px] sm:text-[11px] font-bold text-red-500 uppercase tracking-widest mb-1 sm:mb-2">Absent</p>
+                                <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.absent}</p>
                             </div>
                         </div>
 

@@ -16,22 +16,22 @@ const App: React.FC = () => {
         <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-blue-100 selection:text-blue-900">
             {/* Top Navigation */}
             <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
-                <div className="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
-                    <div className="flex items-center gap-8 h-full">
-                        <Link to="/employees" className="text-sm font-black tracking-tighter uppercase text-gray-900 border-r border-gray-200 pr-8 mr-2 hidden md:block">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center">
+                    <div className="flex items-center gap-4 sm:gap-8 h-full">
+                        <Link to="/employees" className="text-sm font-black tracking-tighter uppercase text-gray-900 border-r border-gray-200 pr-4 sm:pr-8 mr-1 sm:mr-2 hidden sm:block">
                             HRMS <span className="text-blue-600">Lite</span>
                         </Link>
 
-                        <div className="flex items-center gap-2 h-full">
+                        <div className="flex items-center gap-1 sm:gap-2 h-full">
                             <Link
                                 to="/employees"
-                                className={`nav-link h-full flex items-center px-4 border-b-2 transition-all ${isPageActive('/employees') || location.pathname === '/' ? 'border-blue-600 text-blue-600 font-semibold' : 'border-transparent text-gray-500 hover:text-gray-900'}`}
+                                className={`nav-link h-full flex items-center px-3 sm:px-4 border-b-2 transition-all text-sm sm:text-base ${isPageActive('/employees') || location.pathname === '/' ? 'border-blue-600 text-blue-600 font-semibold' : 'border-transparent text-gray-500 hover:text-gray-900'}`}
                             >
                                 Employees
                             </Link>
                             <Link
                                 to="/attendance"
-                                className={`nav-link h-full flex items-center px-4 border-b-2 transition-all ${isPageActive('/attendance') ? 'border-blue-600 text-blue-600 font-semibold' : 'border-transparent text-gray-500 hover:text-gray-900'}`}
+                                className={`nav-link h-full flex items-center px-3 sm:px-4 border-b-2 transition-all text-sm sm:text-base ${isPageActive('/attendance') ? 'border-blue-600 text-blue-600 font-semibold' : 'border-transparent text-gray-500 hover:text-gray-900'}`}
                             >
                                 Attendance
                             </Link>
@@ -40,7 +40,7 @@ const App: React.FC = () => {
 
                     <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Admin Global</span>
+                        <span className="text-[9px] sm:text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none sm:leading-normal">Admin Global</span>
                     </div>
                 </div>
             </nav>
