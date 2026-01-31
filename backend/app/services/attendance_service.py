@@ -23,7 +23,10 @@ def mark_attendance(db: Session, attendance: AttendanceCreate):
             detail="Employee record not found"
         )
     
-    if attendance.date > date.today():
+    from datetime import datetime, timedelta, timezone
+    today_with_buffer = (datetime.now(timezone.utc) + timedelta(hours=14)).date()
+    
+    if attendance.date > today_with_buffer:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot mark attendance for future dates"
