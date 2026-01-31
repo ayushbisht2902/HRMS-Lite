@@ -26,10 +26,10 @@ load_dotenv()
 
 class Settings:
     PROJECT_NAME: str = "HRMS Lite"
-    DATABASE_URL: str = os.getenv("DATABASE_URL")
+    MYSQL_URL: str = os.getenv("MYSQL_URL")
 
     if not DATABASE_URL:
-        raise RuntimeError("DATABASE_URL is not set")
+        raise RuntimeError("MYSQL_URL is not set")
 
 settings = Settings()
 
